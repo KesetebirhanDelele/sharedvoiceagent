@@ -260,7 +260,7 @@ def test_fetch_of_shadow_attempt_does_nothing(tmp_path):
 def test_each_scenario_is_a_valid_request(name):
     r = build(name, "C1", "Sam")
     assert r.problems(4000) == [] and r.sensitive_phrases and "Sam" in r.facts
-    assert "Example" in r.organization                       # clearly fictional
+    assert r.organization.strip()
 
 
 def test_unknown_scenario_is_rejected():

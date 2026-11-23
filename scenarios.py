@@ -23,7 +23,7 @@ def build(name: str, contact_id: str, first_name: str = "there", requested_by: s
         return CallRequest(
             contact_id=contact_id, requested_by=requested_by or "admissions-agent",
             purpose="tell the person about a short AI training course",
-            organization="Example Training Institute",
+            organization="Tech Bros",
             script=("Say it is a 6-week evening course. Ask if they would like a team member to send details. "
                     "Do not quote prices or promise jobs, salaries or any career outcome."),
             facts=(f"The contact's first name is {first_name}. The Applied AI Basics course runs 6 weeks, two evenings "
