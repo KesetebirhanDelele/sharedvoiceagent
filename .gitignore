@@ -221,3 +221,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Shared voice caller: local secrets and run ledger
+.env
+ledger.jsonl
