@@ -31,3 +31,7 @@ Append a new dated section at the end of each work session. Do not rewrite histo
 - Added `BUILD_GUIDE.md` (architecture, GHL build steps, rebuild from scratch, settings, running a test, extending, known gaps) and this entry. Code unchanged since commit 9c74e01.
 - State: no live call has completed yet. The 2026-11-22 8:00 PM write reached GHL but no call followed (workflow not confirmed). The one-time scheduled test for 9:00 AM Central 2026-11-23 is set; read `C:\Users\keset\svc_scheduled\run_doctor_test.log` afterwards and append the result here.
 - Not done: wrong-person and voicemail tests (days 2 and 3), stop-request test, report to Ali, real per-minute cost.
+
+## 2026-11-23 - workflow documentation
+- Added `WORKFLOW.md`: the GHL workflow that starts the call when `call_facts` changes (trigger, scope to the test contact, Call DND and opt-out check, Voice AI action, settings, how to check it ran, troubleshooting). Modelled on the interview agent's "Voice interview_notification" workflow; its agent id, field id and phone number were not copied. Linked from `README.md` and `BUILD_GUIDE.md`. Docs only; code unchanged.
+- Not done: the workflow itself still has to be built and published by hand in GHL (still unconfirmed to exist).

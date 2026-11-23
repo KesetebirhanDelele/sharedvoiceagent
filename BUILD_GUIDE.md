@@ -8,7 +8,7 @@
 ## Build steps in GHL (in order)
 1. Create four contact custom fields (Contact object): `call_organization` (single line), `call_purpose`, `call_script`, `call_facts` (all Multi line). The key must equal the name; check in the merge-field picker. (Done 2026-11-22, verified read-only.)
 2. Create the voice agent by hand; paste the opening line and prompt from `agent_prompt.md`. Keep the confirmation sentence unchanged.
-3. Create the workflow as above; publish it. Check the workflow's execution log after any test.
+3. Create the workflow as above (step-by-step in [WORKFLOW.md](WORKFLOW.md)); publish it. Check the workflow's execution log after any test.
 4. Enable outbound calling under AI Agents, Voice AI (terms or verification may be required). Check the wallet and the per-minute rate in billing: reported $0.06 to $0.215 a minute plus about $0.02 phone (unconfirmed).
 
 ## Build the caller from scratch

@@ -3,7 +3,7 @@
 Stand-alone package (imports nothing from the Cora app) that lets one agent ask the shared GHL outbound voice agent to
 place a call, then reads the result back. Terms: the **voice agent** is the GHL Voice AI agent that talks; the **workflow**
 in GHL starts it when `call_facts` changes; this package is the **caller** that gates, writes the four fields and fetches the
-call. Full rules and acceptance criteria: [SPEC.md](SPEC.md). Prompt for the GHL agent: [agent_prompt.md](agent_prompt.md).
+call. Full rules and acceptance criteria: [SPEC.md](SPEC.md). Prompt for the GHL agent: [agent_prompt.md](agent_prompt.md). GHL workflow that starts the call: [WORKFLOW.md](WORKFLOW.md).
 
 ## What it does
 1. Checks the contact may be called (Call DND, opt-out tags, 8 AM to 8 PM local, one call a day, 14 in 14 days, test allowlist).
