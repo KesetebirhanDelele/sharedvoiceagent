@@ -26,3 +26,8 @@ Append a new dated section at the end of each work session. Do not rewrite histo
 2. Read `run_doctor_test.log` after the 9 AM run; check the transcript against the checklist in spec 53.
 3. Day 2 (course, wrong person) and day 3 (vacation, voicemail), then a stop-request test.
 4. Report results with transcript lines to Ali; record the real per-minute cost.
+
+## 2026-11-23 - documentation pass
+- Added `BUILD_GUIDE.md` (architecture, GHL build steps, rebuild from scratch, settings, running a test, extending, known gaps) and this entry. Code unchanged since commit 9c74e01.
+- State: no live call has completed yet. The 2026-11-22 8:00 PM write reached GHL but no call followed (workflow not confirmed). The one-time scheduled test for 9:00 AM Central 2026-11-23 is set; read `C:\Users\keset\svc_scheduled\run_doctor_test.log` afterwards and append the result here.
+- Not done: wrong-person and voicemail tests (days 2 and 3), stop-request test, report to Ali, real per-minute cost.
