@@ -35,3 +35,7 @@ Append a new dated section at the end of each work session. Do not rewrite histo
 ## 2026-11-23 - workflow documentation
 - Added `WORKFLOW.md`: the GHL workflow that starts the call when `call_facts` changes (trigger, scope to the test contact, Call DND and opt-out check, Voice AI action, settings, how to check it ran, troubleshooting). Modelled on the interview agent's "Voice interview_notification" workflow; its agent id, field id and phone number were not copied. Linked from `README.md` and `BUILD_GUIDE.md`. Docs only; code unchanged.
 - Not done: the workflow itself still has to be built and published by hand in GHL (still unconfirmed to exist).
+
+## 2026-11-23 - second live attempt (override)
+- The 9:00 AM Central scheduled write (reference SVC-20261123150005-cbb7ca) produced no call; the workflow was not yet published. Kes then published the workflow and asked for one more test call to his own number, about 5 minutes later (about 10:35 AM Central). The daily limit was raised to 2 for that single run only (`SVC_MAX_CALLS_PER_DAY=2` in a one-off script outside the repo); not a saved setting. Result: see the next entry.
+- Result of the second attempt (ran 10:47 AM Central, reference SVC-20261123164727-bde6bb): write accepted, read-back matched, no call log found within the 10-minute wait. Whether a call reached the phone is not known to the caller; Kes to confirm, and check the workflow execution log.
