@@ -30,6 +30,25 @@ def parse_transcript(raw: str | None) -> list[tuple[str, str]]:
     return lines
 
 
+def _confirmation_line_index(transcript: list[tuple[str, str]], marker: str) -> int | None:
+    """Index of the transcript line where the agent finishes saying the confirmation sentence, or None.
+
+    GHL's live transcript can split one spoken sentence across several bot lines with a short human line in between
+    ("bot: ...Can you confirm" / "human: Yes." / "bot: you got this information? Please just say yes."), so the marker is
+    searched in the agent's own words joined in order, skipping the person's interruptions. The reply is then read from
+    the lines after the one that completes the sentence."""
+    if not marker:
+        return None
+    joined = ""
+    for i, (speaker, text) in enumerate(transcript):
+        if speaker != "bot":
+            continue
+        joined = f"{joined} {_norm(text)}".strip()
+        if marker in joined:
+            return i
+    return None
+
+
 @dataclass
 class CallAnalysis:
     outcome: str = "no_conversation"   # confirmed | stop_request | no_confirmation | no_answer_or_voicemail | no_conversation
@@ -57,7 +76,7 @@ def analyze(transcript: list[tuple[str, str]], *, confirm_marker: str, sensitive
     first_bot = next((t for s, t in transcript if s == "bot"), "")
     a.ai_disclosed_first = bool(_AI_WORDS.search(first_bot))
     marker = _norm(confirm_marker)
-    asked_at = next((i for i, (s, t) in enumerate(transcript) if s == "bot" and marker and marker in _norm(t)), None)
+    asked_at = _confirmation_line_index(transcript, marker)
     a.confirmation_asked = asked_at is not None
     if asked_at is not None:
         reply = next((t for s, t in transcript[asked_at + 1:] if s == "human" and t.strip()), "")

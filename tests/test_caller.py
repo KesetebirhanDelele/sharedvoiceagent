@@ -203,6 +203,23 @@ def test_happy_call_is_confirmed_and_ref_not_leaked():
     assert a.reference_read_aloud is False and a.candidate_confirmation_line == "Yes"
 
 
+def test_confirmation_sentence_split_across_lines_is_still_found():
+    # Shape of the real 2026-11-24 call: the sentence is split in two bot lines with a person's "Yes." in between.
+    raw = ("bot: Hi, this is Colaberry's AI assistant. Am I speaking with Kes?\nhuman: Yes.\n"
+           "bot: Your appointment is Tuesday. Does that time still work for you?\n\nCan you confirm\n"
+           "human: Yes. Yes.\n"
+           "bot: you got this information? Please just say yes.\nhuman: Yes.\n"
+           "bot: Perfect, thanks.\nhuman: No. That's all.")
+    a = analyze(parse_transcript(raw), confirm_marker=MARKER)
+    assert (a.outcome, a.confirmation_asked, a.confirmed_yes) == ("confirmed", True, True)
+
+
+def test_half_a_confirmation_sentence_is_not_counted():
+    t = parse_transcript("bot: I am an AI assistant. Can you confirm\nhuman: Yes.\nbot: Goodbye.")
+    a = analyze(t, confirm_marker=MARKER)
+    assert (a.confirmation_asked, a.outcome) == (False, "no_confirmation")
+
+
 def test_reference_read_aloud_is_flagged():
     t = parse_transcript("bot: AI here. Reference SVC-20261123-abc123.\nhuman: ok")
     assert analyze(t, confirm_marker=MARKER, reference="SVC-20261123-abc123").reference_read_aloud is True

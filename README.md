@@ -32,6 +32,8 @@ Test: `python -m pytest sharedvoiceagent/tests -q` (no network, no calls).
 ## Limits (read before relying on it)
 - One process at a time (the ledger is a local file). Not a multi-worker service.
 - Readings from the transcript are rules, not judgement; a person checks the transcript against the checklist.
-- UNVERIFIED until a live call: the exact call-log field names for a Voice AI call started by a workflow, the maximum length of a
+- Verified on a real call (2026-11-24): the call-log field names and transcript format. Still UNVERIFIED: the maximum length of a
   Multi line field, and whether Voice AI honours Call DND (it may not; the workflow must check it, see SPEC section 6).
+- GHL allows one call per contact per day across ALL agents in the location; a second call is held until the next day, so "no call log yet" can mean "tomorrow".
+- **Schedule one call per contact per 24 hours.** A second request in that time is held by GHL, and the fields may be overwritten before it dials (unverified whether a held call speaks the values from queue time or dial time), so the call can carry the wrong content or not get through at all. Wait for a call to finish before requesting the next.
 - Each of the three scenarios is an example of how another agent would call this package; the examples use fictional organizations.

@@ -46,9 +46,9 @@ Three worked examples (doctor appointment confirmation, AI course offer, vacatio
 (7) GHL-side setup by Kes (fields, agent, workflow pinned to the test contact); (8) live test calls 1 to 3 plus a stop request.
 
 ## 6. Open items (UNVERIFIED until a live call)
-1. Exact field names in the Voice AI call log for a workflow-started call (the code expects `id`, `createdAt`, `duration`, `summary`, `transcript` as the Cora repo's spec/35 observed).
+1. ~~Exact field names in the Voice AI call log for a workflow-started call~~ VERIFIED 2026-11-24 on a real call: `id`, `agentId`, `contactId`, `createdAt`, `duration`, `summary`, `transcript` ("bot:" / "human:" lines), `messageId`, `extractedData`, `executedCallActions`. A spoken sentence can be split across several bot lines with a short human line in between; the confirmation reading handles that (test_confirmation_sentence_split_across_lines_is_still_found).
 2. Maximum stored length of a Multi line custom field (default limit here is 4,000 characters; `verified_written` catches truncation).
 3. Whether Voice AI honours Call DND. Do not assume it. Put an If/Else at the start of the workflow that exits on Call DND or an opt-out tag, and test it.
-4. Whether the call log appears within the 10-minute default wait.
+4. Whether the call log appears within the 10-minute default wait: NOT when the contact already had a call that day. GHL holds the second call until the next day (observed 2026-11-23 to 2026-11-24: a call written at 10:47 AM Central executed at 8:57 AM Central the next morning). The daily limit is per contact across ALL agents in the location (the interview agent's call used up that day), so run `fetch_result` again later instead of treating "no call log" as a failure. Rule for callers: one outstanding call per contact per 24 hours; a second write can overwrite the first one's fields while it is still held. Unverified: whether a held call speaks the field values from queue time or dial time.
 5. Custom-field value matching: the field is found by name or key `call_*`; confirm the keys match exactly after creation.
 6. Two GHL limits are enforced from our own ledger (1 a day, 14 in 14 days); GHL's own counters are separate and not read.
